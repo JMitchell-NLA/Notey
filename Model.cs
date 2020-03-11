@@ -1,6 +1,20 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
+/*
+
+  __  __           _      _           
+ |  \/  |         | |    | |          
+ | \  / | ___   __| | ___| |  ___ ___ 
+ | |\/| |/ _ \ / _` |/ _ \ | / __/ __|
+ | |  | | (_) | (_| |  __/ || (__\__ \
+ |_|  |_|\___/ \__,_|\___|_(_)___|___/
+                                      
+    - These should be in separate classes, but it was easier for me to keep them all here!                                  
+
+ */
+
+
 
 namespace Notey
 {

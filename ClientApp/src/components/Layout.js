@@ -8,7 +8,7 @@ export class Layout extends Component {
   render () {
     return (
       <div>
-        <NavMenu />
+        {/* <NavMenu />  now there is only one component :)     */}
         <Container>
           {this.props.children}
         </Container>

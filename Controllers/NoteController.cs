@@ -77,6 +77,12 @@ namespace Notey.Controllers
         // POST: api/Note
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
+
+        // curl it like this 
+        // curl -X POST https://localhost:5001/api/Note -d '{"title":"Hey","content":"Wasaap"}' -k -H "Content-Type:application/json"
+
+        
+
         [HttpPost]
         public async Task<ActionResult<Note>> PostNote(Note note)
         {

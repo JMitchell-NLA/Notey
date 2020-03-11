@@ -1,4 +1,10 @@
 /* Provide sufficient contrast against white background */
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+.jumbotron {
+  background-color: #00000000
+}
+
 a {
   color: #0366d6;
 }
@@ -11,4 +17,15 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+body{
+  background-color: navajowhite;
+  font-family: 'Indie Flower', cursive;
+}
+
+.cardInput {
+  background-color: #00000000;
+  border-style: none;
+  font-size: 5em;
 }
