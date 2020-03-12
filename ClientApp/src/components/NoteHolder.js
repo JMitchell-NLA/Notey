@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Container,Row,Col,Jumbotron,Button } from 'reactstrap';
+import './NoteHolder.css'
 
 export class NoteHolder extends Component {
   static displayName = NoteHolder.name;
 
   constructor(props) {
     super(props); // <- always call your constructors kids! 
-    this.state = { notes: [], loading: true, value:"Re-write me!" }; // <- Check out my state yo'  
+    this.state = { notes: [], loading: true, value:"" }; // <- Check out my state yo'  
 
     this.handleInput = this.handleInput.bind(this);
 
@@ -23,6 +24,12 @@ export class NoteHolder extends Component {
 
   handleInput(event){
     this.setState({value: event.target.value})
+  }
+
+  handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      this.handleClick(event);
+    }
   }
 
   handleClick(event){
@@ -47,18 +54,16 @@ export class NoteHolder extends Component {
 
   static renderNotes(notes) {
     return (
-        <div>
+        <span>
         { // this is the start of an echo section.  Don't put HTML in here.
             notes.map( note => // This boi gonna render them all! 
-                <Jumbotron fluid>
-                <Container fluid>
-                <h1 className="display-3">{note.title}</h1>
-                <p className="lead">{note.content}</p>
-                </Container>
-            </Jumbotron>
+                <div>
+                <q>{note.title}</q>
+                <br></br>    
+                </div>           
         )
         }
-        </div>
+        </span>
     );
   }
 
@@ -70,20 +75,22 @@ export class NoteHolder extends Component {
       : NoteHolder.renderNotes(this.state.notes);
     // What a edgy return statement! :O 
     return ( // In line event handler!! 
-      <div>
-        <input type="text" className="cardInput" onClick={() => this.setState({value:""})} value={this.state.value} onChange={this.handleInput}></input>
-        <Button color="link" onClick={this.handleClick}> click me! </Button>
+      <output>
+        <div>
 
         {contents}
-        
-      </div>
+
+        <q><input type="text" className="cardInput" onKeyPress={this.handleKeyPress} onClick={() => this.setState({value:""})} value={this.state.value} onChange={this.handleInput}></input></q>
+        {/* <Button color="lin  k" onClick={this.handleClick}> click me! </Button> */}
+        </div>
+      </output>
     );
   }
 
   async getNotes() {
     const response = await fetch('api/Note');
     const data = await response.json();
-    this.setState({ notes: data.reverse(), loading: false });
+    this.setState({ notes: data, loading: false });
   }
 
 }
