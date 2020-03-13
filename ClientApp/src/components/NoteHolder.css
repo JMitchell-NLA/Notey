@@ -20,10 +20,14 @@
 html {
   background-color: black;
   padding: 1em;
+  
 }
 output {
+  overflow: hidden;
+  position: fixed;
   border-radius: 1em;
   background-color: #131;
+  background-attachment: fixed;
   background-image: radial-gradient(ellipse 500% 100% at 50% 90%, transparent, #121);
   background-position: center;
   display: block;
@@ -36,6 +40,8 @@ output {
   position: relative;
 }
 output::before {
+  background-attachment: fixed;
+  position: fixed;
   position: absolute;
   content: "";
   display: block;
@@ -49,7 +55,8 @@ output::before {
   animation: scan 7.5s linear 0s infinite;
 }
 output::after {
-  position: absolute;
+  background-attachment: fixed;
+  position: fixed;
   content: "";
   display: block;
   top: 0;

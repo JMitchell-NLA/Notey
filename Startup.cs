@@ -31,6 +31,9 @@ namespace Notey
             });
 
             services.AddDbContext<TaggingContext>();
+            
+            // step 2: Add signalR
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +65,9 @@ namespace Notey
                     endpoints.MapControllerRoute(
                     name: "api",
                     pattern: "{controller=Note}/{action=Index}/{id?}");
+
+                    // step 3, add the signal hub
+                    endpoints.MapHub<SignalHub>("/signalHub");
             });
 
             app.UseSpa(spa =>

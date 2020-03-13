@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container,Row,Col,Jumbotron,Button } from 'reactstrap';
 import './NoteHolder.css'
+import * as signalR from '@microsoft/signalr'
 
 export class NoteHolder extends Component {
   static displayName = NoteHolder.name;
@@ -19,6 +20,16 @@ export class NoteHolder extends Component {
   // LIFECYCLE HOOK!! BABY!!! 
   componentDidMount() {
     this.getNotes();
+
+    // for websocket connection
+    this.connection = new signalR.HubConnectionBuilder().withUrl("/signalHub").build();
+    this.connection.on("ReceiveMessage",  (status) => {
+    console.log("got an update signal")  
+    this.getNotes();
+  });
+
+  this.connection.start()
+
   }
 
 
@@ -43,8 +54,17 @@ export class NoteHolder extends Component {
 .then((response) => response.json())
 .then((data) => {
   console.log('Success:', data);
+  // clear the text field
   this.setState({value:""});
+
+  // fetch the new notes
   this.getNotes();
+
+    // signal other people to get a new note list
+    this.connection.invoke("SendMessage", "update!").catch(function (err) {
+      return console.error(err.toString());
+  });
+
 })
 .catch((error) => {
   console.error('Error:', error);
@@ -91,6 +111,8 @@ export class NoteHolder extends Component {
     const response = await fetch('api/Note');
     const data = await response.json();
     this.setState({ notes: data, loading: false });
+    var objDiv = document.body
+    objDiv.scrollTop = objDiv.scrollHeight;
   }
 
 }
