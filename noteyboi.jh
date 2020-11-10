@@ -1,0 +1,54 @@
+
+application {
+  config {
+    baseName myApp,
+    applicationType gateway,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    clientFramework react
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName NotesApp,
+    applicationType microservice,
+    packageName net.kooksdoes,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+  }
+  entities A, B
+}
+
+entity Note {
+ Integer ID
+ String Content
+ String Title
+}
+
+entity Tag {
+Integer ID
+String Name
+}
+
+entity User {
+String Name
+String DOB
+String ProfileUrl
+}
+
+
+
+relationship ManyToMany {
+  Note to Tag
+}
+
+relationship OneToMany{
+User to Note
+}
+    
+relationship OneToMany{
+User to Tag
+}
