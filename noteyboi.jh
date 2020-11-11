@@ -1,0 +1,44 @@
+
+application {
+  config {
+    baseName Notey,
+    applicationType monolith,
+    packageName net.kooksdoes,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    clientFramework react
+  }
+  entities *
+}
+
+
+entity Note {
+ Integer ID
+ String Content
+ String Title
+}
+
+entity Tag {
+Integer ID
+String Name
+}
+
+entity User {
+String Name
+String DOB
+String ProfileUrl
+}
+
+
+
+relationship ManyToMany {
+  Note to Tag
+}
+
+relationship OneToMany{
+User to Note
+}
+    
+relationship OneToMany{
+User to Tag
+}
